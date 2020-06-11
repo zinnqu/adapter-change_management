@@ -191,28 +191,28 @@ healthcheck(callback) {
      * Note how the object was instantiated in the constructor().
      * get() takes a callback function.
      */
-    this.connector.get(callback(data, error) => {
+    this.connector.get((data, error) => {
         let tickets = [];
         let ticket = {
-            change_ticket_number: "",
-            active: "",
-            priority: 4,
-            description: "",
-            work_start: "",
-            work_end: "",
-            change_ticket_key: ""
+            "change_ticket_number": "",
+            "active": "",
+            "priority": 4,
+            "description": "",
+            "work_start": "",
+            "work_end": "",
+            "change_ticket_key": ""
         };
         if (data) {
-            if (data.hasOwnProperty(body)){
+            if (data.body){
                 let results = JSON.parse(data.body).result;
-                for (var i = 0; i < result.length; i++) {
-                    ticket.change_ticket_number = result[i].number;
-                    ticket.active = result[i].active;
-                    ticket.priority = result[i].priority;
-                    ticket.description = result[i].description;
-                    ticket.work_start = result[i].work_start;
-                    ticket.work_end = result[i].work_end;
-                    ticket.change_ticket_key = result[i].sys_id;
+                for (var i = 0; i < results.length; i++) {
+                    ticket.change_ticket_number = results[i].number;
+                    ticket.active = results[i].active;
+                    ticket.priority = results[i].priority;
+                    ticket.description = results[i].description;
+                    ticket.work_start = results[i].work_start;
+                    ticket.work_end = results[i].work_end;
+                    ticket.change_ticket_key = results[i].sys_id;
                     tickets.push(ticket);
                 }
                 return(callback(tickets, error));
@@ -241,18 +241,18 @@ healthcheck(callback) {
      * Note how the object was instantiated in the constructor().
      * post() takes a callback function.
      */
-    this.connector.post(callback(data, error) => {
+    this.connector.post((data, error) => {
         let ticket = {
-            change_ticket_number: "",
-            active: "",
-            priority: 4,
-            description: "",
-            work_start: "",
-            work_end: "",
-            change_ticket_key: ""
+            "change_ticket_number": "",
+            "active": "",
+            "priority": 4,
+            "description": "",
+            "work_start": "",
+            "work_end": "",
+            "change_ticket_key": ""
         };
         if (data) {
-            if (data.hasOwnProperty(body)){
+            if (data.body){
                 let result = JSON.parse(data.body).result;
                 ticket.change_ticket_number = result.number;
                 ticket.active = result.active;
