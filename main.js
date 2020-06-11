@@ -94,6 +94,8 @@ class ServiceNowAdapter extends EventEmitter {
  *   that handles the response.
  */
 healthcheck(callback) {
+ let callbackData = null;
+ let callbackError = null;
  this.getRecord((result, error) => {
    /**
     * For this lab, complete the if else conditional
@@ -101,8 +103,6 @@ healthcheck(callback) {
     * or the instance was hibernating. You must write
     * the blocks for each branch.
     */
-   let callbackData = null;
-   let callbackError = null;
    if (error) {
      /**
       * Write this block.
@@ -116,8 +116,8 @@ healthcheck(callback) {
       * healthcheck(), execute it passing the error seen as an argument
       * for the callback's errorMessage parameter.
       */
-      log.info('ServiceNow adapter is offline: '+ error);
       this.emitOffline();
+      log.info('ServiceNow adapter is offline: '+ error);
       callbackError = error;
    } else {
      /**
@@ -130,11 +130,11 @@ healthcheck(callback) {
       * parameter as an argument for the callback function's
       * responseData parameter.
       */
-      log.info('ServiceNow adapter is online');
       this.emitOnline();
+      log.info('ServiceNow adapter is online');
       callbackData = result;
    }
-   return(callbackData, callbackError);
+   //return(callbackData, callbackError);
  });
 }
 
@@ -191,9 +191,7 @@ healthcheck(callback) {
      * Note how the object was instantiated in the constructor().
      * get() takes a callback function.
      */
-    let error = null;
-    let data = null;
-    this.connector.get((data, error) => callback(data, eror));
+    this.connector.get(callback);
   }
 
   /**
@@ -212,9 +210,7 @@ healthcheck(callback) {
      * Note how the object was instantiated in the constructor().
      * post() takes a callback function.
      */
-    let error = null;
-    let data = null;
-    this.connector.post((data, error) => callback(data, eror));
+    this.connector.post(callback);
   }
 }
 

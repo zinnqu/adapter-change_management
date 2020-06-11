@@ -77,7 +77,7 @@ class ServiceNowConnector {
    * @param {error} callback.error - The error property of callback.
    */
   post(callback) {
-    let postCallOptions = { ...this.options};
+    let postCallOptions = this.options;
     postCallOptions.method = 'POST';
     this.sendRequest(postCallOptions, (results, error) => callback(results, error));
   }
