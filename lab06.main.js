@@ -191,38 +191,7 @@ healthcheck(callback) {
      * Note how the object was instantiated in the constructor().
      * get() takes a callback function.
      */
-    this.connector.get(callback(data, error) => {
-        let tickets = [];
-        let ticket = {
-            change_ticket_number: "",
-            active: "",
-            priority: 4,
-            description: "",
-            work_start: "",
-            work_end: "",
-            change_ticket_key: ""
-        };
-        if (data) {
-            if (data.hasOwnProperty(body)){
-                let results = JSON.parse(data.body).result;
-                for (var i = 0; i < result.length; i++) {
-                    ticket.change_ticket_number = result[i].number;
-                    ticket.active = result[i].active;
-                    ticket.priority = result[i].priority;
-                    ticket.description = result[i].description;
-                    ticket.work_start = result[i].work_start;
-                    ticket.work_end = result[i].work_end;
-                    ticket.change_ticket_key = result[i].sys_id;
-                    tickets.push(ticket);
-                }
-                return(callback(tickets, error));
-            }
-        } else {
-            return(callback(data,error));
-        }
-        
-
-    });
+    this.connector.get(callback);
   }
 
   /**
@@ -241,32 +210,7 @@ healthcheck(callback) {
      * Note how the object was instantiated in the constructor().
      * post() takes a callback function.
      */
-    this.connector.post(callback(data, error) => {
-        let ticket = {
-            change_ticket_number: "",
-            active: "",
-            priority: 4,
-            description: "",
-            work_start: "",
-            work_end: "",
-            change_ticket_key: ""
-        };
-        if (data) {
-            if (data.hasOwnProperty(body)){
-                let result = JSON.parse(data.body).result;
-                ticket.change_ticket_number = result.number;
-                ticket.active = result.active;
-                ticket.priority = result.priority;
-                ticket.description = result.description;
-                ticket.work_start = result.work_start;
-                ticket.work_end = result.work_end;
-                ticket.change_ticket_key = result.sys_id;
-                return(callback(ticket, error));
-            }
-        } else {
-            return(callback(data,error));
-        }        
-    });
+    this.connector.post(callback);
   }
 }
 
